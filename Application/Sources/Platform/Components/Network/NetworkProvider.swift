@@ -29,6 +29,9 @@ open class NetworkProvider<T: TargetType> {
                                      cachePolicy: .useProtocolCachePolicy,
                                      timeoutInterval: target.requestTimeout)
             let task = session.dataTask(with: request) { data, urlResponse, error in
+                print(String(data: data!, encoding: .utf8))
+                
+                
                 if let error = error {
                     observer.send(error: .urlSession(error))
                 } else if let apiError = parseApiError(data, urlResponse as? HTTPURLResponse) {

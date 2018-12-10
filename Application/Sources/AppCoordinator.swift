@@ -65,6 +65,7 @@ final class AppCoordinator {
     
     func show() {
         window.makeKeyAndVisible()
+        useCases.joke.getCategories().start()
     }
     
     func showRandomJoke() {

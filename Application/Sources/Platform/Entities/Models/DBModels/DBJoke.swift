@@ -12,7 +12,7 @@ import RealmSwift
 @objcMembers
 final class DBJoke: Object {
     dynamic var id: String = ""
-    dynamic var category: [String] = []
+    dynamic var categories = List<DBCategory>()
     dynamic var iconURLString: String?
     dynamic var jokeURLString: String = ""
     dynamic var jokeText: String = ""
@@ -21,9 +21,9 @@ final class DBJoke: Object {
 }
 
 extension DBJoke {
-    func asDomain() -> Joke {
+    func asDomain() -> Joke {        
         return .init(id: id,
-                     category: category,
+                     categories: categories.map({ $0.asDomain() }),
                      icon: iconURLString.flatMap({ ImageSource.url(URL(string: $0)!) }),
                      jokeURL: URL(string: jokeURLString)!,
                      jokeText: jokeText)
@@ -34,7 +34,7 @@ extension Joke {
     func asDB() -> DBJoke {
         let model = DBJoke()
         model.id = id
-        model.category = category
+        model.categories.append(objectsIn: categories.map({ $0.asDB() }))
         model.iconURLString = icon?.url?.absoluteString
         model.jokeURLString = jokeURL.absoluteString
         model.jokeText = jokeText
