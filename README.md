@@ -1,7 +1,7 @@
 # chucknorriss-jokes-ios
 
 
-| Branch   | Build Status |
+|    ⎈     |      ⌗     |
 |----------|-------------|
 | xCode    | 10.1		|
 | Swift    | 4.2        |
